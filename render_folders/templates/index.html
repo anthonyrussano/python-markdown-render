@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Markdown Directory Index</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('serve_static', filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>Markdown Directory Index</h1>
+    <ul>
+        {% for folder, contents in tree.items() %}
+        <li>
+            <a href="{{ url_for('render_markdown', filename=folder) }}">{{ folder }}</a>
+            {% if contents %}
+            <ul>
+                {% for subfolder, subcontents in contents.items() %}
+                <li>
+                    <a href="{{ url_for('render_markdown', filename=(folder + '/' + subfolder)) }}">{{ subfolder }}</a>
+                    {% if subcontents %}
+                    <ul>
+                        {% for file, _ in subcontents.items() %}
+                        <li>
+                            <a
+                                href="{{ url_for('render_markdown', filename=(folder + '/' + subfolder + '/' + file)) }}">{{
+                                file }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ filename }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('serve_static', filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>{{ filename }}</h1>
+    <div class="content">
+        {{ content|safe }}
+    </div>
+</body>
+
+</html>
